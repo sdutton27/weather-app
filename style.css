@@ -1,0 +1,121 @@
+html,body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Raleway', sans-serif;
+}
+
+.weather-img {
+    /* This is what brings everything in one line on the left. Maybe we have a link that makes this a class or not a class. Let's start out with it like this.*/
+    display: flex;
+    align-items:center;
+    justify-content: flex-start;
+}
+
+body {
+    background-color:black;
+    background-image: url(img/beautiful-sky.gif);
+    height: auto;
+    min-height: 100%;
+    background-size:cover;
+
+    background-repeat: no-repeat;
+}
+
+.container {
+    display:flex;
+    flex-direction:column;
+    gap: 30px;
+}
+
+.weather-title {
+    vertical-align:middle;
+    font-size: 30px;
+    margin-left:10px;
+    margin-right:10px;
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 1px 1px rgb(255, 255, 255, 0.4);
+}
+
+#searchLocationInput {
+    background: rgb(61, 61, 61, .8);
+    background-image: url(img/search.png);
+    background-repeat: no-repeat;
+    background-size: 11px;
+    background-position: 3% 50%;
+    padding-left: 25px;
+
+    color: rgb(197, 197, 197);
+    font-weight: 400;
+    font-stretch: semi-expanded;
+    border: 0px;
+    border-radius: 9px;
+}
+
+#locationForm {
+    display: flex;
+    justify-content:center;
+    gap: 3px;
+}
+
+#submit-btn {
+    background-color: transparent;
+    color: rgb(117, 117, 117);
+    border: 1px solid rgb(117, 117, 117, .8);
+    border-radius: 9px;
+    padding: 6px 10px;
+    font-weight: 400;
+}
+
+#submit-btn:hover {
+    background-color: rgb(117, 117, 117, .8);
+    color: rgb(197, 197, 197);
+}
+
+.city-short-listing {
+    display:grid;
+    /*background-color:rgb(11, 11, 49);*/
+    background-image: url(img/starry-night.gif);
+    background-size:contain;
+    border-radius: 15px 15px;
+    grid-template-columns: 1.4fr 0.8fr 0.6fr; 
+    grid-template-rows: 1.1fr 0.6fr .3fr 0.9fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "location . current-temp"
+      "time-at-loc . current-temp"
+      ". . ."
+      "clear . low-high";
+}
+.location { 
+    grid-area: location; 
+    align-self: flex-end;
+    margin-left: 30px;
+    margin-top: 0px;
+    color:white;
+    font-weight: 700;
+    font-size: 25px;
+}
+.current-temp { 
+    grid-area: current-temp;
+    align-self: flex-start;
+    color: white; 
+    font-size: 54px;
+}
+.time-at-loc { 
+    grid-area: time-at-loc; 
+    margin-left: 30px;
+    color:rgb(121, 142, 161);
+}
+.clear { 
+    grid-area: clear; 
+    margin-left: 30px;
+    color:rgb(121, 142, 161);
+    text-decoration:none;
+}
+.clear:hover {
+    color:rgb(255, 255, 255);
+}
+.low-high { 
+    grid-area: low-high; 
+    color: white; 
+}
