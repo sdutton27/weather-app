@@ -71,9 +71,9 @@ const getWeather = async (lat, lon) => {
     //newHTML.style.justifyContent = 'center';
     //const date = new Date(data.dt*1000)
 
-    var d = new Date();
-    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-    var nd = new Date(utc + (1000*data.timezone));
+    const d = new Date();
+    const utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    const nd = new Date(utc + (1000*data.timezone));
     const timeString = nd.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 
     newHTML.innerHTML = `<div class="city-short-listing ${(data.weather[0].main).toLowerCase()}">

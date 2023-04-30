@@ -40,10 +40,13 @@ To-Do List:
 - handle nighttime for the backgrounds
 - sand background 
 - handle zipcodes
+- handle only making one object per city/zipcode
 - color for the fonts  - DONE
 - figure out what data we want to put for the single-view 
 - get a nicely formatted single view 
 - work on the backend of connecting it all with the two viewpages
+- change font to Helvetica Neue
+- chance of rain is under pop
 
 ${new Date(new Date(data.dt).getTime() + (data.timezone * 1000))}
 ${new Date(data.dt * 1000 - (data.timezone * 1000)).getHours()}:${new Date(data.dt + (data.timezone * 1000)).getMinutes()}
