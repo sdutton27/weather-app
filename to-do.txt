@@ -36,19 +36,23 @@ this way we just have a single dynamic webpage all in index.HTML ^
 
 ==========================
 To-Do List:
-- format the loading and error messages (in middle)
-- handle nighttime for the backgrounds
-- sand background 
-- handle zipcodes
-- handle only making one object per city/zipcode
+- format the loading and error messages (in middle) - DONE
 - color for the fonts  - DONE
-- figure out what data we want to put for the single-view 
-- get a nicely formatted single view 
-- work on the backend of connecting it all with the two viewpages
-- change font to Helvetica Neue
-- chance of rain is under pop
-
-${new Date(new Date(data.dt).getTime() + (data.timezone * 1000))}
-${new Date(data.dt * 1000 - (data.timezone * 1000)).getHours()}:${new Date(data.dt + (data.timezone * 1000)).getMinutes()}
-
-can make a new Date that is .now(), get the UTC, and then add the offset to that?
+- figure out what data we want to put for the single-view - DONE
+- get a nicely formatted single view - DONE
+- change font to Helvetica Neue - DONE
+- work on the backend of connecting it all with the two viewpages - DONE
+- - get it so that singleHTML gives us the top value of the multiHTML if we press the button - DONE
+- check the sunrise and sunset values to plug them in - DONE
+    -- if the sunrise already happened today then get tomorrow's -> same with the sunset
+- handle only making one object per city/zipcode - DONE
+- fix timing so that the hourly forecast is the time also based on the timezone offset - DONE
+- sand background - DONE
+- if-statement for chance of rain inside the hourly - DONE
+- handle nighttime for the backgrounds -- [2] of the icon - DONE
+- fix day/night background images for single view - DONE
+- fix day/night background images for multi view - DONE
+- fix the background images so we don't choose the ones with numbers! - DONE
+    - put this in the class as well -- maybe we don't need the class anymore and can just inline css the image - DONE
+- get the value for the little bar in the daily - DONE
+- fix gap upon deletion - DONE

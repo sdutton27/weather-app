@@ -22,6 +22,19 @@ body {
     display:flex;
     flex-direction:column;
 }
+
+/* For the loading message*/
+h1 {
+    text-align:center;
+    font-size: 20px;
+}
+
+/* For the error messages*/
+h2 {
+    text-align:center;
+    font-size: 20px;
+}
+
 .weather-img {
     /* This is what brings everything in one line on the left. Maybe we have a link that makes this a class or not a class. Let's start out with it like this.*/
     display: flex;
@@ -30,12 +43,13 @@ body {
 
     position:sticky;
     top:0;
+    z-index:3; /* always in front*/
 }
 
 .container {
     display:flex;
     flex-direction:column;
-    gap: 30px;
+    /*gap: 30px;*/
     overflow-y:scroll;
     min-height:calc(100vh - 105px); /* gets menu button on bottom*/
 
@@ -101,13 +115,9 @@ input:-webkit-autofill,
 .city-short-listing {
     position: relative;
     display:grid;
-    /*background-color:rgb(11, 11, 49);*/
-    background-image: url(img/starry-night.gif); /* Delete this */
-    /*background-image: url(img/1ZvR.gif);*/
     background-repeat:no-repeat;
     background-size: 100% auto;
 
-    /*background-size:contain;*/
     border-radius: 30px;
     grid-template-columns: 1.4fr 0.8fr 0.8fr; 
     grid-template-rows: 1.1fr 0.6fr .3fr 0.9fr; 
@@ -117,6 +127,7 @@ input:-webkit-autofill,
       "time-at-loc . current-temp"
       ". . ."
       "type-of-weather . low-high";
+    margin-bottom: 30px;
 }
 .location { 
     grid-area: location; 
@@ -126,6 +137,7 @@ input:-webkit-autofill,
     color:white;
     font-weight: 700;
     font-size: 25px;
+    text-transform: capitalize;
 }
 .current-temp { 
     grid-area: current-temp;
@@ -134,18 +146,16 @@ input:-webkit-autofill,
     color: white; 
     font-size: 54px;
 }
-/* The remove button for a list object*/
-.current-temp a{
-    padding-left: 9px;
-    margin-right: 11px;
-    font-size: 15px;
-    vertical-align:text-top;
-    color:rgb(121, 142, 161);
-    font-weight:600;
-}
 
-a:not([href]):not([class]), a:not([href]):not([class]):hover {
+/* The remove button for a list object*/
+.city-short-listing button {
     color:rgb(121, 142, 161);
+    font-size: 20px;
+    height: 20px;
+    vertical-align: top;
+    padding:13px;
+    border:0;
+    background: none;
 }
 .time-at-loc { 
     grid-area: time-at-loc; 
@@ -166,41 +176,15 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     grid-area: low-high; 
     color: white;
     justify-self: flex-end; 
-    /*margin-right: 33px;*/
     position:absolute;
     right: 33px;
 }
-
-
-/* These are for the background based on the type of weather */
-.thunderstorm{
-    background-image: url(img/thunderstorm.gif);
-}
-.drizzle{
-    background-image: url(img/drizzle.gif);
-}
-.rain{
-    background-image: url(img/rain.gif);
-}
-.snow{
-    background-image: url(img/snow2.gif);
-}
-.mist, .fog, .smoke, .haze, .dust, .ash{
-    background-image: url(img/mist2.gif);
-    background-position: center;
-} 
-.sand{}
-.clear{background-image: url(img/clear.gif);}
-.clouds{background-image: url(img/clouds4.gif);}
-
 .menu-button {
     align-self:flex-end;
     height: 40px;
     width: 40px;
     position: sticky;
-    /*position: absolute;*/
     bottom: 20px;
-    /*left: 20px;*/
     right: 20px;
     background-color: rgba(255, 255, 255, 0.5);
     background-image: url('img/menu.jpg');
@@ -227,13 +211,6 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     color: rgb(255, 255, 255, 0.6);
 }
 
-/* LIST.HTML items*/
-.container-for-list {
-    display:flex;
-    flex-direction:column;
-    gap: 30px;
-}
-
 .menu-button-clicked {
     background-color: rgba(255, 255, 255, 0.8);
 }
@@ -251,7 +228,6 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 .listing-title {
     display:flex;
     flex-direction:column;
-    /*background:red;*/
     text-align:center;
 }
 
@@ -286,7 +262,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 }
 
 /* both containers */
-.hourly-container, .ten-day-container {
+.hourly-container, .eight-day-container {
     background-color: rgba(114, 111, 134, 0.5);
     border-radius: 10px;
     padding: 6px 10px;
@@ -315,18 +291,28 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     font-weight: 900;
 }
 
-.single-list-container {
+.hourly-percent-rain {
+    margin:0;
+    padding:0;
+    line-height: 8px;
+    font-size: 8px;
+    color:rgb(140, 201, 255);
+    margin-top: -8px; /* moves it up in front of the weather icon*/
+}
+
+.single-view {
     padding-top:30px;
     border-radius: 15px;
     position:relative;
 }
 
 /* get background image opaque*/
-.single-list-container::after {
+.single-view::after {
     content: "";
-    background-image: url('img/snow2.gif'); /* delete this*/
+    background-image: var(--background-gif); /* delete this*/
     background-size: auto 100%;
     background-repeat:no-repeat;
+    background-size: cover;
     opacity:0.7;
     position:absolute;
     top: 0;
@@ -337,12 +323,12 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     transition: .3s opacity linear;
 }
 
-.single-list-container img {
+.single-view img {
     height: 40px;
     width: auto;
 }
 
-.single-list-container .sunrise{
+.single-view .sunrise{
     height: 30px;
     width: 30px;
     margin-left:3px;
@@ -350,7 +336,8 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     margin-bottom: 10px;
     align-self:center;
 }
-.single-list-container .sunset {
+
+.single-view .sunset {
     height: 30px;
     width: 30px;
     margin-top:1px;
@@ -360,23 +347,23 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     align-self:center;
 }
 
-.ten-day-container {
+.eight-day-container {
     font-size: 12px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-#ten-day-icon {
+#eight-day-icon {
     height: 10px;
     width: 10px;
 }
 
-#ten-day-title {
+#eight-day-title {
     font-size: 9px;
     color:#93a8bc;
 }
 
-.ten-day-container hr {
+.eight-day-container hr {
     margin:0px 0px;
     color:#93a8bc;
 }
@@ -392,12 +379,12 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     grid-template-rows: 1fr; 
     gap: 0px 0px; 
     grid-template-areas: 
-      "day-in-10 weather bar";
+      "day-in-8 weather bar";
 }
 
-.day-in-10 {
+.day-in-8 {
     font-weight: 500;
-    grid-area: day-in-10;
+    grid-area: day-in-8;
 }
 
 .one-day-forecast img {
@@ -413,7 +400,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     margin-left: 10px;
     align-self:flex-end;
     padding-bottom:2px;
-    color:rgb(94, 180, 255);
+    color:rgb(140, 201, 255);
 }
 
 .temp-bar  {
@@ -431,16 +418,14 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
 }
 
 .foreground-bar {
-    /*background-image:linear-gradient(to right, cyan, yellow);*/
     z-index: 1;
     height: 5px;
-    /*width: 50px;*/
     border-radius: 6px;
     justify-self:center;
     margin: 0px 8px;
     position:absolute;
     top: 0;
-    left: 0;
+    left: 0; /* as default */
 }
 
 #current-temp-dot {
@@ -451,7 +436,6 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
     border: 1px solid black;
     position:absolute;
     top: 0;
-    left: 30px;
     z-index:2;
 }
 

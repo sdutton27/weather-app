@@ -5,3 +5,11 @@ Snow - dorion
 Atmosphere -- Mist (Ann Arbor), Smoke, Haze, Dust, Fog, Sand, Dust, Ash, Squall Tornado
 Clear
 Clouds
+
+Thunderstorm - N
+Drizzle - N
+Rain - N
+Snow - N
+Atmosphere -- all under mist-n
+Clear - N
+Clouds - N
